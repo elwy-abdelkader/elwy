@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Protein Molecular Weight Calculator</title>
+</head>
+<body>
+  <h1>Protein Molecular Weight Calculator</h1>
+  <form id="protein-form">
+    <label for="sequence">Amino Acid Sequence:</label><br>
+    <textarea id="sequence" rows="4" cols="50"></textarea><br>
+    <button type="button" onclick="calculateMolecularWeight()">Calculate Molecular Weight</button>
+	<br>
+	<button type="button" onclick="clearseq()">Clear Sequence</button>
+<br>
+<br>
+ <form>
+    <label for="dropdown1">Original Residue1:</label><br>
+    <select id="dropdown1" onchange="selectValue1()">
+      <option value="">Select an option</option>
+      <option value="0" selected>None</option>
+      <option value="89.094">A</option>
+      <option value="121.154">C</option>
+	  <option value="133.103">D</option>
+      <option value="147.130">E</option>
+      <option value="165.192">F</option>
+	  <option value="75.067">G</option>
+      <option value="155.157">H</option>
+      <option value="131.175">I</option>
+	  <option value="146.190">K</option>
+      <option value="131.175">L</option>
+      <option value="149.208">M</option>
+	  <option value="132.119">N</option>
+      <option value="115.132">P</option>
+      <option value="146.146">Q</option>
+	  <option value="174.204">R</option>
+      <option value="105.093">S</option>
+      <option value="119.120">T</option>
+	  <option value="117.148">V</option>
+      <option value="204.229">W</option>
+      <option value="181.191">Y</option>
+    </select>
+  </form> 
+  <br>
+  <p id="selected-value1">Selected value1:</p>
+
+  <script>
+    //let NAA1 = 0
+    
+  </script> 
+  <form>
+    <label for="dropdown2">Mutant Residue1:</label><br>
+    <select id="dropdown2" onchange="selectValue2()">
+      <option value="">Select an option</option>
+      <option value="0" selected>None</option>
+      <option value="89.094">A</option>
+      <option value="121.154">C</option>
+	  <option value="133.103">D</option>
+      <option value="147.130">E</option>
+      <option value="165.192">F</option>
+	  <option value="75.067">G</option>
+      <option value="155.157">H</option>
+      <option value="131.175">I</option>
+	  <option value="146.190">K</option>
+      <option value="131.175">L</option>
+      <option value="149.208">M</option>
+	  <option value="132.119">N</option>
+      <option value="115.132">P</option>
+      <option value="146.146">Q</option>
+	  <option value="174.204">R</option>
+      <option value="105.093">S</option>
+      <option value="119.120">T</option>
+	  <option value="117.148">V</option>
+      <option value="204.229">W</option>
+      <option value="181.191">Y</option>
+    </select>
+  </form> 
+  <br>
+  <p id="selected-value2">Selected value2:</p>
+
+  <script>
+    function selectValue2() {
+
+    }
+  </script> 
+  
+  
+  
+  </form> 
+  <br>
+  <div id="result"></div>
+  <script>
+    const aminoAcidMasses = {
+      'A': 71.079,
+      'C': 103.139,
+      'D': 115.088,
+      'E': 129.115,
+      'F': 147.177,
+      'G': 57.052,
+      'H': 137.142,
+      'I': 113.16,
+      'K': 128.175,
+      'L': 113.16,
+      'M': 131.193,
+      'N': 114.104,
+      'P': 97.117,
+      'Q': 128.131,
+      'R': 156.189,
+      'S': 87.078,
+      'T': 101.105,
+      'V': 99.133,
+      'W': 186.214,
+      'Y': 163.176
+    };
+
+    function selectValue1() {
+      
+	
+    }
+	
+	
+	function calculateMolecularWeight() {
+      const sequence = document.getElementById('sequence').value;
+	  
+	  
+	  var dropdown1 = document.getElementById("dropdown1");
+      var NAA1 = dropdown1.options[dropdown1.selectedIndex].value; NAA1 = parseFloat(NAA1);
+      document.getElementById("selected-value1").innerHTML = "Selected value1: " + NAA1;
+	  
+	  var dropdown2 = document.getElementById("dropdown2");
+      var NAA2 = dropdown2.options[dropdown2.selectedIndex].value; NAA2 = parseFloat(NAA2);
+      document.getElementById("selected-value2").innerHTML = "Selected value2: " + NAA2;
+	  
+	  
+      let molecularWeightint = 18.015;
+      for (const aminoAcid of sequence) {
+        if (!aminoAcidMasses.hasOwnProperty(aminoAcid)) {
+          document.getElementById('result').innerHTML = `Error: Invalid amino acid "${aminoAcid}"`;
+          return;
+        }
+        molecularWeightint += aminoAcidMasses[aminoAcid]; 
+      }
+	  molecularWeight = molecularWeightint - NAA1 + NAA2;
+		if (molecularWeightint > 18.015) {
+		document.getElementById('result').innerHTML = `Molecular weight: ${molecularWeight.toFixed(2)} Da` ;		
+
+		} else {
+		document.getElementById('result').innerHTML = `Molecular weight: 0.00 Da`;
+		}
+		
+      
+    }
+  </script>
+  	<script>
+    function clearseq() {
+      document.getElementById("sequence").value = "";
+	  document.getElementById("result").innerHTML = "";
+    }
+	</script>
+</body>
+</html>
